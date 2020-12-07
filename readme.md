@@ -1,11 +1,48 @@
 # IMC SE Trading – Python Coding Questions
 
+## Notes to reviewer
+
+**Pre-requisites:**
+
+* **python 3.6+**
+* The ability to create a virtualenv and install dependencies
+
+
+### Quick Start
+Python virtualenv can be created using:
+
+```
+virtualenv .venv
+source ./.venv/bin/activate
+```
+
+Python dependencies can be installed using
+
+```
+pip install -r requirements.txt
+```
+
+### Running Tests
+
+A convenience script has been added to run pytests
+
+```
+./test.sh
+```
+
+This script simply
+
+1. Sets the `PYTHONPATH` environment variable to the `./src` folder
+2. Runs pytest
+
+## Original Spec:
+
 We have a class that provides an easier way to retrieve data from the internet. In this example we have chosen to use SpaceX as they offer up to date data. In the class shown above we want to extend some features.
 
 API Documentation: [https://docs.spacexdata.com/?version=latest](https://docs.spacexdata.com/?version=latest)
 
 
-## Question 1
+### Question 1
 
 While debugging any issue’s that may arise, we want to add a new method to allow us to specify date specific launches and returns a list . The output should be something like:
 
@@ -30,7 +67,7 @@ While debugging any issue’s that may arise, we want to add a new method to all
 ```
 
 
-## Question 2
+### Question 2
 
 Continuation from the previous question we want to build another method to return a flight with the heaviest payload given a date range. The output should be something like
 
@@ -68,7 +105,7 @@ Continuation from the previous question we want to build another method to retur
                                                                       'reused': False}]}},
 ```
 
-## Question 3
+### Question 3
 
 In the following example determine the date where the Australian dollar had the best exchange rate for the previous month.  You will need to fetch data for each day in that month, extract the Australian dollar rate (AUD).  Write a function to return as a tuple the date and best rate.
  
