@@ -1,4 +1,5 @@
 import json
+import datetime
 import requests
 import copy
 from urllib.parse import urljoin
@@ -44,11 +45,18 @@ class SpaceXData(object):
 
     # API methods
     def get_launches(self, **kwargs):
-        return self._request('launches/'.format(kwargs.get('path', '')), kwargs)
-
+        return self._request('launches/'. format(kwargs.get('path', '')), kwargs)
 
     def get_payloads(self, flight_number):
         """ Fetch Payloads """
         flight = self.get_launches(path='upcoming', flight_number=flight_number)[0]
         payloads = flight.get('rocket').get('second_stage').get('payloads')
         return payloads
+
+    def get_launch_date_range(self, start_date, end_date):
+        # Input validation throws if invalid
+        datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        datetime.datetime.strptime(end_date, '%Y-%m-%d')
+
+        launches = self.get_launches(path='', start=start_date, end=end_date)
+        return launches
