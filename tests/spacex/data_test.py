@@ -65,6 +65,7 @@ def test_get_lauchdate_when_date_invalid():
 
 
 @pytest.mark.download
+@pytest.mark.skip(reason="only required to sanity check the response size")
 def test_all_launch_data_size():
     # Our API call to find the flight with the largest payload will
     # currently download all of the data unpaged, this test will report
