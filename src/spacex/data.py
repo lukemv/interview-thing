@@ -58,5 +58,38 @@ class SpaceXData(object):
         datetime.datetime.strptime(start_date, '%Y-%m-%d')
         datetime.datetime.strptime(end_date, '%Y-%m-%d')
 
+        # Didn't paginate this, currently the API has a rate limit of
+        # 50 req/sec and the total size of all launches (end 2020) was
+        # about 815kB
         launches = self.get_launches(path='', start=start_date, end=end_date)
         return launches
+
+    def get_largest_payload_flight_in_date_range(self, start_date, end_date):
+        launches = self.get_launch_date_range(start_date, end_date)
+        # Assuming that we're trying to find the largest payload of any
+        # flight here rather than the flight with the largest sum of payloads.
+        largest = -1
+        result = None
+        for flight in launches:
+            payloads = flight.get('rocket').get('second_stage').get('payloads')
+            max_payload = max([payload['payload_mass_kg'] for payload in payloads])
+            if max_payload > largest:
+                largest = max_payload
+                result = flight
+
+        return result
+
+    def get_largest_total_mass_flight_in_date_range(self, start_date, end_date):
+        launches = self.get_launch_date_range(start_date, end_date)
+        # Assuming that we're taking the sum of all of the payloads in a given
+        # flight and returning the flight with the largest sum
+        largest = -1
+        result = None
+        for flight in launches:
+            payloads = flight.get('rocket').get('second_stage').get('payloads')
+            total_payloads = sum([payload['payload_mass_kg'] for payload in payloads])
+            if total_payloads > largest:
+                largest = total_payloads
+                result = flight
+
+        return result
