@@ -1,7 +1,7 @@
 import pytest
 from freezegun import freeze_time
 
-from exrates.utils import ExchangeRateData
+from exrates.data import ExchangeRateData
 
 
 @pytest.mark.download

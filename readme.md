@@ -35,6 +35,39 @@ This script simply
 1. Sets the `PYTHONPATH` environment variable to the `./src` folder
 2. Runs pytest
 
+### Installing the CLI
+
+With the virtualenv activated, use `pip install --editable .`
+
+i.e.
+
+```
+source ./.venv/bin/activate
+pip install -r requirements.txt
+pip install --editable .
+```
+
+Then use the `demo` command
+
+```
+demo --help
+```
+
+A few example commands:
+
+```
+demo --help
+demo spacex-launches-by-date --help
+demo spacex-launches-by-date '2019-01-01' '2020-05-01'
+demo spacex-launches-by-date '2020-04-22' '2020-04-23'
+demo spacex-biggest-payload-flight '2020-04-22' '2020-04-23'
+demo spacex-biggest-payload-flight '2020-04-22' '2020-04-23' | jq
+demo exrates-rates-in-month --help
+demo exrates-rates-in-month 2020 11 'AUD'
+demo exrates-best-rate-in-month 2020 11 'AUD'
+demo exrates-best-rate-in-prev-month 'AUD'
+```
+
 ## Original Spec:
 
 We have a class that provides an easier way to retrieve data from the internet. In this example we have chosen to use SpaceX as they offer up to date data. In the class shown above we want to extend some features.
